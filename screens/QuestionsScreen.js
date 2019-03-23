@@ -27,33 +27,35 @@ export default class QuestionsScreen extends React.Component {
 
   callback = (snapshot) => {
     var nav = this.props.navigation;
-    let qs_arr = []
-    console.log("SNAP", snapshot.val())
-      let keyidx = 0;
-      for (var key in snapshot.val()) {
+    let arr = {};
+ 
+    snapshot.forEach(function(childSnapshot){
+      let key = childSnapshot.key;
+      let childData = childSnapshot.val();
+      console.log(childData);
+      arr[key] = childData;
+    });
 
-        qs_arr.unshift(<HomePageQuestions
-          navigation={nav} key={keyidx}
-          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
-        keyidx++;
-      }
-      this.setState({dbCallComplete: true, questions: qs_arr})
+    // let arr = []
+    // console.log("SNAP", snapshot.val())
+    //   let keyidx = 0;
+    //   for (var key in snapshot.val()) {
+
+    //     arr.unshift(<HomePageQuestions
+    //       navigation={nav} key={keyidx}
+    //       my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
+    //     keyidx++;
+    //   }
+      this.setState({dbCallComplete: true, questions: arr})
   }
 
-  createListOfStuff = () => {
-    var nav = this.props.navigation;
-    let arr = []
 
-    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
-
-    return arr;
-  }
   switchMode() {
       this.setState({mapMode : !this.state.mapMode});
   }
 
   componentDidMount(){
-    this.createListOfStuff();
+    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
   render() {
     //var my_arr = this.createListOfStuff()
@@ -64,7 +66,9 @@ export default class QuestionsScreen extends React.Component {
         {!this.state.mapMode ? 
         <MapScreen/> : 
         <LinksScreen  navigation = {this.props.navigation} 
-        my_questions = {!this.state.dbCallComplete ? null : this.state.questions}/>}
+        my_questions = {!this.state.dbCallComplete ? null : 
+          Object.keys(this.state.questions).map(question => 
+          <HomePageQuestions data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>}
 
 
         <AwesomeButtonBlue 
