@@ -10,7 +10,7 @@ import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elemen
 import GenerateForm from 'react-native-form-builder';
 
 export default class NewQuestionScreen extends React.Component {
-    login() {
+    submit() {
         const formValues = this.formGenerator.getValues();
         console.log('FORM VALUES', formValues);
       }
@@ -27,15 +27,14 @@ export default class NewQuestionScreen extends React.Component {
           />
         </View>
         <View style={formStyles.submitButton}>
-          <Button block title="Login" onPress={() => this.login()}>
-            <Text>Login</Text>
+          <Button block title="Submit" onPress={() => this.submit()}>
+            <Text>Submit</Text>
           </Button>
         </View>
       </View>
         );
     }
 }
-
 
 
 
@@ -53,24 +52,12 @@ const formStyles = {
   const fields = [
     {
       type: 'text',
-      name: 'user_name',
+      name: 'question_text',
       required: true,
-      icon: 'ios-person',
-      label: 'Username',
+      /*icon: 'ios-person',*/
+      label: 'Type your question here...',
+      multiline: true,
+      props:{multiline:true}
     },
-    {
-      type: 'password',
-      name: 'password',
-      icon: 'ios-lock',
-      required: true,
-      label: 'Password',
-    },
-    {
-      type: 'picker',
-      name: 'country',
-      mode: 'dialog',
-      label: 'Select Country',
-      defaultValue: 'INDIA',
-      options: ['US', 'INDIA', 'UK', 'CHINA', 'FRANCE'],
-    },
+   
   ];
