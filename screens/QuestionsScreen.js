@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AwesomeButton from "react-native-really-awesome-button";
 import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blue'
 
-export default class QuestionScreen extends React.Component {
+export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
     title: 'Questions',
   };
