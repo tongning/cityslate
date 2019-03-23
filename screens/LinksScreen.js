@@ -28,23 +28,7 @@ export default class LinksScreen extends React.Component {
   }
 
 
-  createListOfStuff = () => {
-    var nav = this.props.navigation; 
-    let arr = []
-    let my
-    firebase.database().ref('Users/').on('value', function (snapshot) {
-      console.log("SNAP",snapshot.val())
-      for (var key in snapshot.val()){
-        
-      arr.push(<HomePageQuestions 
-        navigation = {nav} key = {1} 
-        my_comment = {snapshot.val()[key].email} ></HomePageQuestions>);
-      }
-    });
 
-    
-    return arr;
-}
 
   render() {
     this.writeUserData("A","B","C");
@@ -53,7 +37,7 @@ export default class LinksScreen extends React.Component {
       <ScrollView style={styles.container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}   
-            {this.createListOfStuff()}
+           {this.props.my_questions}
            
         
       </ScrollView>
