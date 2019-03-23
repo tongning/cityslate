@@ -1,53 +1,36 @@
+
 import React from 'react';
-import { MapView, Location} from 'expo';
 import {View, StyleSheet, Button} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AwesomeButton from "react-native-really-awesome-button";
+import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blue'
 
-export default class MapScreen extends React.Component {
+export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Maps',
+    title: 'Questions',
   };
 
   constructor(props){
     super(props);
     this.state = {
-      region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
-      flex: 0,
+      mapMode : true,
     };
   }
 
-  componentDidMount() {
-    setTimeout(() => this.setState({flex: 1}), 500);
-    return Location.getCurrentPositionAsync({}).then(position => {
-      if (position) {
-        this.setState({
-          region: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003,
-          },
-        });
-      }
-    });
+  switchMode() {
+      this.setState({mapMode : !this.state.mapMode});
   }
-
   render() {
     return (
       <View style={{flex: 1}}>
-        <MapView
-          style={{ flex: this.state.flex }}
-          showsMyLocationButton={true}
-          showsUserLocation={true}
-          initialRegion={this.state.region}
-        />
         
+        <AwesomeButtonBlue 
+            raiseLevel="0" 
+            onPress={next => this.setState({mapMode : !this.state.mapMode})}>
+            {this.state.mapMode ? "Map" : "List"}
+        </AwesomeButtonBlue>
+
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("notes tapped!")}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
