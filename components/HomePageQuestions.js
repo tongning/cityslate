@@ -1,8 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Button} from 'react-native';
 
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {QuestionScreen} from '../screens/QuestionScreen';
 
 
 export default class HomePageQuestions extends React.Component {
@@ -11,14 +11,27 @@ export default class HomePageQuestions extends React.Component {
   };
 
   render() {
+
     return (
- 
+
          <View style={{flexDirection:"row"}}>
           
           <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
-          <Text style={{fontSize:20}}>    {this.props.my_comment}</Text>
+         
+        
+          <Button  
+           color="#ff5c5c"
+          title={this.props.my_comment}
+         onPress={() => this.props.navigation.push("Question",{
+          myItemName: " HI898",
+         })}
+         />
+      
           </View>
+
+      
 
     );
   }
 }
+

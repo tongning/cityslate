@@ -3,42 +3,43 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import {View, Text, Image, Button,Alert} from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
-
+import MapScreen from '../screens/MapScreen';
+import QuestionScreen from '../screens/QuestionScreen';
+import firebase from '../firebase.js'; // <--- add this line
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
 
-  createListOfStuff = () => {
-    let arr = []
-    var num_posts = 100
-    for (var i = 0; i < num_posts; i++) {
-        
-        arr.push(<HomePageQuestions key = {i} my_comment = "this is comment yo" ></HomePageQuestions>);
-        
-    }
-    return arr;
-}
+  writeUserData(email, fname, lname) {
+    firebase.database().ref('Users/').push({
+      email,
+      fname,
+      lname
+    }).then((data) => {
+      //success callback
+      console.log('data ', data)
+    }).catch((error) => {
+      //error callback
+      console.log('error ', error)
+    })
+  }
+
+
+
 
   render() {
+    this.writeUserData("A","B","C");
     return (
       <View style={{flex:1}}>
       <ScrollView style={styles.container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}   
-            {this.createListOfStuff()}
+           {this.props.my_questions}
            
         
       </ScrollView>
-      <Button
-          style = {styles.submitButton}
-             title="+Add A question"
-             color="#841584"
-             onPress={() => {
-              Alert.alert('You tapped the button!');
-            }}
-             />
     </View>
     );
   }
