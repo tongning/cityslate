@@ -48,6 +48,7 @@ MapStack.navigationOptions = {
 
 const LinksStack = createStackNavigator({
   Links: LinksScreen,
+  Questions:QuestionScreen,
 });
 
 LinksStack.navigationOptions = {
