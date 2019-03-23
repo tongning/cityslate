@@ -12,7 +12,6 @@ import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elemen
 import GenerateForm from 'react-native-form-builder';
 
 export default class NewQuestionScreen extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {};
@@ -24,7 +23,7 @@ export default class NewQuestionScreen extends React.Component {
         this.writeQuestionData(formValues['question_text'])
     }
 
-    writeQuestionData(questionText, lat, lon) {
+    writeQuestionData(questionText) {
         lat = this.state.region.latitude;
         lon = this.state.region.longitude;
         firebase.database().ref('Questions/').push({
