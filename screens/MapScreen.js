@@ -13,8 +13,8 @@ export default class MapScreen extends React.Component {
     super(props);
     this.state = {
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 38.915574,
+        longitude: -77.041658,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
