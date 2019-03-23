@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, Button} from 'react-native';
 import UpvoteCounter from '../components/UpvoteCounter';
+//import console = require('console');
 
 export default class HomePageQuestions extends React.Component {
   static navigationOptions = {
@@ -8,6 +9,8 @@ export default class HomePageQuestions extends React.Component {
   };
 
   render() {
+    my_comment = this.props.my_comment
+    console.log("EHLLO", typeof my_comment)
     return (
 
          <View style={{flexDirection:"row"}}>
@@ -17,12 +20,12 @@ export default class HomePageQuestions extends React.Component {
         
           <Button  
            color="#ff5c5c"
-          title={this.props.my_comment}
+          title={my_comment}
          onPress={() => this.props.navigation.push("Question",{
-          myItemName: " HI898",
+          myItemName: {my_comment},
          })}
          />
-      <UpvoteCounter upvote_number = {10}></UpvoteCounter>
+      <UpvoteCounter my_comment = {my_comment}></UpvoteCounter>
           </View>
 
       
