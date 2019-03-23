@@ -10,6 +10,17 @@ export default class LinksScreen extends React.Component {
     title: 'Links',
   };
 
+  createListOfStuff = () => {
+    let arr = []
+    var num_posts = 100
+    for (var i = 0; i < num_posts; i++) {
+        
+        arr.push(<HomePageQuestions my_comment = "this is comment yo" ></HomePageQuestions>);
+        
+    }
+    return arr;
+}
+
   render() {
     return (
       <View style={{flex:1}}>
@@ -20,7 +31,9 @@ export default class LinksScreen extends React.Component {
            <HomePageQuestions my_comment = {"this is a comment"}></HomePageQuestions>
            <HomePageQuestions my_comment = {"this is a comment"}></HomePageQuestions>
            <HomePageQuestions my_comment = {"this is a comment"}></HomePageQuestions>
-        
+           
+            {this.createListOfStuff()}
+           
         
       </ScrollView>
       <Button
@@ -43,13 +56,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   submitButton: {
-    width: 60,  
-height: 60,   
-borderRadius: 30,            
-backgroundColor: '#ee6e73',                                    
-position: 'absolute',                                          
-bottom: 10,                                                    
-right: 10, 
+  width: 60,  
+  height: 60,   
+  borderRadius: 30,            
+  backgroundColor: '#ee6e73',                                    
+  position: 'absolute',                                          
+  bottom: 10,                                                    
+  right: 10, 
 }
 });
 
