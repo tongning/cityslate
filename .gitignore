@@ -1,4 +1,8 @@
-node_modules
-.expo
-.expo/settings.json
-.expo/packager-info.json
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+
