@@ -22,7 +22,7 @@ export default class HomePageQuestions extends React.Component {
           <Button  
            color="#ff5c5c"
           title={this.props.my_comment}
-         onPress={() => this.props.navigation.push("Questions")}
+         onPress={() => this.props.navigation.push("Question")}
          />
       
           </View>
