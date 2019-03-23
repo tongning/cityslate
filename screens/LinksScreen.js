@@ -7,7 +7,6 @@ import MapScreen from '../screens/MapScreen';
 import QuestionScreen from '../screens/QuestionScreen';
 import firebase from '../firebase.js'; // <--- add this line
 
-
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
@@ -27,25 +26,17 @@ export default class LinksScreen extends React.Component {
     })
   }
 
-  createListOfStuff = () => {
-    let arr = []
-    var num_posts = 100
-    for (var i = 0; i < num_posts; i++) {
-        
-        arr.push(<HomePageQuestions navigation = {this.props.navigation} key = {i} my_comment = "this is comment yo" ></HomePageQuestions>);
-        
-    }
-    return arr;
-}
+
+
 
   render() {
-    //this.writeUserData("A","B","C");
+    this.writeUserData("A","B","C");
     return (
       <View style={{flex:1}}>
       <ScrollView style={styles.container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}   
-            {this.createListOfStuff()}
+           {this.props.my_questions}
            
         
       </ScrollView>

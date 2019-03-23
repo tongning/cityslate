@@ -9,6 +9,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import MapScreen from '../screens/MapScreen';
 import QuestionsScreen from '../screens/QuestionsScreen';
 import QuestionScreen from '../screens/QuestionScreen';
+import NewQuestionScreen from '../screens/NewQuestionScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -49,6 +50,7 @@ MapStack.navigationOptions = {
 const QuestionsStack = createStackNavigator({
   Questions: QuestionsScreen,
   Question:QuestionScreen,
+  NewQuestionScreen:NewQuestionScreen
 });
 
 QuestionsStack.navigationOptions = {
