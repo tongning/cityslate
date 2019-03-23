@@ -57,7 +57,7 @@ export default class QuestionsScreen extends React.Component {
         </AwesomeButtonBlue>
 
         <ActionButton buttonColor="rgba(231,76,60,1)">
-          <ActionButton.Item buttonColor='#9b59b6' title="Add Question" onPress={() => console.log("notes tapped!")}>
+          <ActionButton.Item buttonColor='#9b59b6' title="Add Question" onPress={() => this.props.navigation.push("NewQuestionScreen")}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
 

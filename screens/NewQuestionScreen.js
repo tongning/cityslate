@@ -6,43 +6,21 @@ import HomePageQuestions from '../components/HomePageQuestions';
 import MapScreen from '../screens/MapScreen';
 import QuestionScreen from '../screens/QuestionScreen';
 import firebase from '../firebase.js'; // <--- add this line
-
-export default class LinksScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Links',
-  };
-
-  writeUserData(email, fname, lname) {
-    firebase.database().ref('Users/').push({
-      email,
-      fname,
-      lname
-    }).then((data) => {
-      //success callback
-      console.log('data ', data)
-    }).catch((error) => {
-      //error callback
-      console.log('error ', error)
-    })
-  }
+import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
 
-
-
-  render() {
-    this.writeUserData("A","B","C");
-    return (
-      <View style={{flex:1}}>
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}   
-           {this.props.my_questions}
-           
-        
-      </ScrollView>
-    </View>
-    );
-  }
+export default class NewQuestionScreen extends React.Component {
+    
+    render() {
+        //this.writeUserData("A","B","C");
+        return (
+            <View>
+              
+              <Text>Form goes here</Text>
+                
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

@@ -46,6 +46,7 @@ export default class MapScreen extends React.Component {
           showsMyLocationButton={true}
           showsUserLocation={true}
           initialRegion={this.state.region}
+          region={this.state.region}
         />
       </View>
     );
