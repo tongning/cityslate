@@ -4,21 +4,31 @@ import { ExpoLinksView } from '@expo/samples';
 import {View, Text, Image, Button,Alert} from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
 import MapScreen from '../screens/MapScreen';
+import { MapView, Location} from 'expo';
+
 import QuestionScreen from '../screens/QuestionScreen';
 import firebase from '../firebase.js'; // <--- add this line
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import GenerateForm from 'react-native-form-builder';
 
 export default class NewQuestionScreen extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     submit() {
         const formValues = this.formGenerator.getValues();
         console.log('FORM VALUES', formValues);
         this.writeQuestionData(formValues['question_text'])
     }
 
-    writeQuestionData(questionText) {
+    writeQuestionData(questionText, lat, lon) {
+        lat = this.state.region.latitude;
+        lon = this.state.region.longitude;
         firebase.database().ref('Questions/').push({
-            questionText
+            questionText, lat, lon
         }).then((data) => {
             //success callback
             console.log('data ', data)
@@ -27,6 +37,24 @@ export default class NewQuestionScreen extends React.Component {
             console.log('error ', error)
         })
     }
+
+    componentDidMount() {
+        setTimeout(() => 
+            this.setState({flex: 1, showMarkers: true}) , 500);
+        return Location.getCurrentPositionAsync({}).then(position => {
+          if (position) {
+            this.setState({
+              region: {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                latitudeDelta: 0.003,
+                longitudeDelta: 0.003,
+              },
+            });
+          }
+        });
+    }
+
     render() {
         //this.writeUserData("A","B","C");
         return (
