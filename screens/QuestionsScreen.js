@@ -26,7 +26,7 @@ export default class QuestionsScreen extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        {!this.state.mapMode ? <MapScreen/> : <LinksScreen  navigation = {this.props.navigation}/>}
+        {!this.state.mapMode ? <MapScreen navigation = {this.props.navigation}/> : <LinksScreen  navigation = {this.props.navigation}/>}
 
         <AwesomeButtonBlue 
             raiseLevel={0}
