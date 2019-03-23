@@ -54,8 +54,8 @@ export default class LinksScreen extends React.Component {
              title="+Add A question"
              color="#841584"
              onPress={() => {
-              Alert.alert('You tapped the button!');
-            }}
+              this.props.navigation.push("Question")}
+            }
              />
     </View>
     );
