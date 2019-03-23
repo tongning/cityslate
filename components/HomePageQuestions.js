@@ -7,10 +7,12 @@ export default class HomePageQuestions extends React.Component {
   static navigationOptions = {
     title: 'Links',
   };
-
+  constructor(props){
+    super(props);
+   
+  }
   render() {
-    my_comment = this.props.my_comment
-    console.log("EHLLO", typeof my_comment)
+ 
     return (
 
       <View style={{ flexDirection: "row", flex: 1, width: 200/*Dimensions.get('window').width*0.7*/ }}>
@@ -19,18 +21,17 @@ export default class HomePageQuestions extends React.Component {
         <View style={[{ width: "90%", margin: 10}]}>
         <Button
           color="#ff5c5c"
-          title={my_comment}
-
+          title={this.props.my_comment}
 
           onPress={() => this.props.navigation.push("Question", {
-            myItemName: { my_comment },
+            myItemName: this.props.my_comment,
           })}
         />
         </View>
 
         <View style={[{ margin: 10}]}>
-
-        <UpvoteCounter my_comment_prop={my_comment}></UpvoteCounter>
+         
+        <UpvoteCounter my_comment_prop={this.props.my_comment}></UpvoteCounter>
         </View>
 
       </View>

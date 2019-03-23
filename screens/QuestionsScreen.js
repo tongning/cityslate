@@ -27,17 +27,17 @@ export default class QuestionsScreen extends React.Component {
 
   callback = (snapshot) => {
     var nav = this.props.navigation;
-    let arr = []
+    let qs_arr = []
     console.log("SNAP", snapshot.val())
       let keyidx = 0;
       for (var key in snapshot.val()) {
 
-        arr.unshift(<HomePageQuestions
+        qs_arr.unshift(<HomePageQuestions
           navigation={nav} key={keyidx}
           my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
         keyidx++;
       }
-      this.setState({dbCallComplete: true, questions: arr})
+      this.setState({dbCallComplete: true, questions: qs_arr})
   }
 
   createListOfStuff = () => {

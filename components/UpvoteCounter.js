@@ -11,7 +11,7 @@ export default class UpvoteCounter extends React.Component {
       upvote_count =  0
       my_comment = this.props.my_comment_prop
       firebase.database().ref('Questions/').on('value', function (snapshot) {
-        console.log("SNAP",snapshot.val())
+        
         for (var key in snapshot.val()){
           
        if (snapshot.val()[key].questionText ===  my_comment){
@@ -33,7 +33,7 @@ export default class UpvoteCounter extends React.Component {
         
           var my_id;
           firebase.database().ref('Questions/').once('value', function (snapshot) {
-            console.log("SNAP",snapshot.val())
+           
             for (var key in snapshot.val()){
               console.log("CURRENT QUESTION TEXT IS ", snapshot.val()[key].questionText, my_comment)
            if (snapshot.val()[key].questionText ===  my_comment){
