@@ -25,7 +25,7 @@ export default class HomePageQuestions extends React.Component {
           myItemName: {my_comment},
          })}
          />
-      <UpvoteCounter my_comment = {my_comment}></UpvoteCounter>
+      <UpvoteCounter my_comment_prop = {my_comment}></UpvoteCounter>
           </View>
 
       

@@ -6,7 +6,6 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 
 
-
 export default class QuestionScreen extends React.Component {
   static navigationOptions = {
      title: 'Questions',
@@ -14,10 +13,11 @@ export default class QuestionScreen extends React.Component {
   
 
   render() {
+    console.log("IDK", this.props.navigation.state)
        return (
       <View style={{flex:1}}>
      <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
-     <Text style={{fontSize: 20}} >HELLOW {this.props.navigation.state.params.myItemName} </Text>
+     <Text style={{fontSize: 20}} >HELLOW {this.props.navigation.state.params.myItemName.my_comment} </Text>
      <Button  
            color="#ff5c5c"
           title="GO BACK"
