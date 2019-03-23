@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import MapScreen from '../screens/MapScreen';
+import QuestionScreen from '../screens/QuestionsScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -32,6 +33,24 @@ const MapStack = createStackNavigator({
 
 MapStack.navigationOptions = {
   tabBarLabel: 'Map',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+const QuestionStack = createStackNavigator({
+  Question: QuestionScreen,
+});
+
+QuestionStack.navigationOptions = {
+  tabBarLabel: 'Question',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -77,4 +96,5 @@ export default createBottomTabNavigator({
   LinksStack,
   SettingsStack,
   MapStack,
+  QuestionStack
 });
