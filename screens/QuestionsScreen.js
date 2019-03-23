@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View, StyleSheet, Button} from 'react-native';
+import {View, StyleSheet, Dimensions, Button} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AwesomeButton from "react-native-really-awesome-button";
