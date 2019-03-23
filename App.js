@@ -2,13 +2,39 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-
+import firebase from 'firebase';
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
-
+  writeUserData(email,fname,lname){
+    firebase.database().ref('Users/').push({
+        email,
+        fname,
+        lname
+    }).then((data)=>{
+        //success callback
+        console.log('data ' , data)
+    }).catch((error)=>{
+        //error callback
+        console.log('error ' , error)
+    })
+}
   render() {
+
+    var config = {
+      apiKey: "AIzaSyC1HXHLGtlsZ_JXu2cWb_w1spivlGylqoI",
+      authDomain: "cityslate-f6544.firebaseapp.com",
+      databaseURL: "https://cityslate-f6544.firebaseio.com",
+      projectId: "cityslate-f6544",
+      storageBucket: "cityslate-f6544.appspot.com",
+      messagingSenderId: "426723584032"
+    };
+    
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+      this.writeUserData("hello@hello.com", "F", "L");
+    }
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -28,6 +54,7 @@ export default class App extends React.Component {
   }
 
   _loadResourcesAsync = async () => {
+    
     return Promise.all([
       Asset.loadAsync([
         require('./assets/images/robot-dev.png'),
