@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapView, Location} from 'expo';
-import {View, StyleSheet, Button} from 'react-native';
+import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -19,11 +19,23 @@ export default class MapScreen extends React.Component {
         longitudeDelta: 0.0421,
       },
       flex: 0,
+      markers: [
+        {
+          latlng: {
+            latitude: 38.910950,
+            longitude: -77.044617
+          }, 
+          title: "My Marker",
+          description: "Description"
+        }
+      ],
+      showMarkers: false
     };
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState({flex: 1}), 500);
+    setTimeout(() => 
+        this.setState({flex: 1, showMarkers: true}) , 500);
     return Location.getCurrentPositionAsync({}).then(position => {
       if (position) {
         this.setState({
@@ -46,8 +58,25 @@ export default class MapScreen extends React.Component {
           showsMyLocationButton={true}
           showsUserLocation={true}
           initialRegion={this.state.region}
-          region={this.state.region}
-        />
+          region={this.state.region}>
+
+          {this.state.showMarkers ? this.state.markers.map(marker => (
+            <MapView.Marker
+              coordinate={marker.latlng}
+              title={marker.title}
+              description={marker.description}>
+
+                <MapView.Callout tooltip>
+                <TouchableHighlight  underlayColor='#dddddd'>
+                                          <View>
+                                              <Text>{marker.title}{"\n"}{marker.description}</Text>
+                                          </View>
+                                      </TouchableHighlight>
+                </MapView.Callout>
+            </MapView.Marker>
+          )) : null}
+
+        </MapView>
       </View>
     );
   }

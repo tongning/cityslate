@@ -49,6 +49,7 @@ export default class QuestionsScreen extends React.Component {
         {!this.state.mapMode ? <MapScreen/> : 
         <LinksScreen  navigation = {this.props.navigation} my_questions = {this.createListOfStuff()}/>}
 
+
         <AwesomeButtonBlue 
             raiseLevel={0}
             onPress={next => this.setState({mapMode : !this.state.mapMode})}
