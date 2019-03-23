@@ -8,6 +8,8 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import MapScreen from '../screens/MapScreen';
 
+import QuestionScreen from '../screens/QuestionScreen';
+
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
@@ -71,6 +73,8 @@ SettingsStack.navigationOptions = {
     />
   ),
 };
+
+
 
 export default createBottomTabNavigator({
   HomeStack,

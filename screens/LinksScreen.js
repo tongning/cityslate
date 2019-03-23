@@ -3,6 +3,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import {View, Text, Image, Button,Alert} from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
+import MapScreen from '../screens/MapScreen';
+import QuestionScreen from '../screens/QuestionScreen';
 
 
 export default class LinksScreen extends React.Component {
@@ -15,7 +17,7 @@ export default class LinksScreen extends React.Component {
     var num_posts = 100
     for (var i = 0; i < num_posts; i++) {
         
-        arr.push(<HomePageQuestions key = {i} my_comment = "this is comment yo" ></HomePageQuestions>);
+        arr.push(<HomePageQuestions navigation = {this.props.navigation} key = {i} my_comment = "this is comment yo" ></HomePageQuestions>);
         
     }
     return arr;
