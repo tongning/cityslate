@@ -3,8 +3,6 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import MapScreen from '../screens/MapScreen';
-import QuestionScreen from '../screens/QuestionScreen';
 
 
 export default createAppContainer(createSwitchNavigator({

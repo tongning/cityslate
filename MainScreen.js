@@ -3,8 +3,7 @@ import { Platform, StatusBar, Text, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon, Permissions, Constants, Location } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import firebase from 'firebase';
-
-export default class App extends React.Component {
+export default class MainScreen extends React.Component {
   state = {
     isLoadingComplete: false,
     location: null,
@@ -19,7 +18,6 @@ export default class App extends React.Component {
       this._getLocationAsync();
     }
   }
-
 
   render() {
     
