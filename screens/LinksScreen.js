@@ -27,19 +27,27 @@ export default class LinksScreen extends React.Component {
     })
   }
 
+
   createListOfStuff = () => {
+    var nav = this.props.navigation; 
     let arr = []
-    var num_posts = 100
-    for (var i = 0; i < num_posts; i++) {
+    let my
+    firebase.database().ref('Users/').on('value', function (snapshot) {
+      console.log("SNAP",snapshot.val())
+      for (var key in snapshot.val()){
         
-        arr.push(<HomePageQuestions navigation = {this.props.navigation} key = {i} my_comment = "this is comment yo" ></HomePageQuestions>);
-        
-    }
+      arr.push(<HomePageQuestions 
+        navigation = {nav} key = {1} 
+        my_comment = {snapshot.val()[key].email} ></HomePageQuestions>);
+      }
+    });
+
+    
     return arr;
 }
 
   render() {
-    //this.writeUserData("A","B","C");
+    this.writeUserData("A","B","C");
     return (
       <View style={{flex:1}}>
       <ScrollView style={styles.container}>
