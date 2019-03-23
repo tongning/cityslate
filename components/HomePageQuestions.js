@@ -16,7 +16,7 @@ export default class HomePageQuestions extends React.Component {
          <View style={{flexDirection:"row"}}>
           
           <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
-          <Text style={{fontSize:20}}>{this.props.my_comment}</Text>
+          <Text style={{fontSize:20}}>    {this.props.my_comment}</Text>
           </View>
 
     );
