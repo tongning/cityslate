@@ -13,7 +13,20 @@ export default class NewQuestionScreen extends React.Component {
     submit() {
         const formValues = this.formGenerator.getValues();
         console.log('FORM VALUES', formValues);
-      }
+        this.writeQuestionData(formValues['question_text'])
+    }
+
+    writeQuestionData(questionText) {
+        firebase.database().ref('Questions/').push({
+            questionText
+        }).then((data) => {
+            //success callback
+            console.log('data ', data)
+        }).catch((error) => {
+            //error callback
+            console.log('error ', error)
+        })
+    }
     render() {
         //this.writeUserData("A","B","C");
         return (
@@ -35,8 +48,6 @@ export default class NewQuestionScreen extends React.Component {
         );
     }
 }
-
-
 
 const formStyles = {
     wrapper: {
