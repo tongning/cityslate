@@ -12,19 +12,6 @@ export default class LinksScreen extends React.Component {
     title: 'Links',
   };
 
-  writeUserData(email, fname, lname) {
-    firebase.database().ref('Users/').push({
-      email,
-      fname,
-      lname
-    }).then((data) => {
-      //success callback
-      console.log('data ', data)
-    }).catch((error) => {
-      //error callback
-      console.log('error ', error)
-    })
-  }
   render() {
    return (
       <View style={{flex:1}}>

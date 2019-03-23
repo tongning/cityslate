@@ -1,9 +1,6 @@
 import React from 'react';
 import {View, Text, Image, Button} from 'react-native';
-
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import {QuestionScreen} from '../screens/QuestionScreen';
-
+import UpvoteCounter from '../components/UpvoteCounter';
 
 export default class HomePageQuestions extends React.Component {
   static navigationOptions = {
@@ -11,7 +8,6 @@ export default class HomePageQuestions extends React.Component {
   };
 
   render() {
-
     return (
 
          <View style={{flexDirection:"row"}}>
@@ -26,7 +22,7 @@ export default class HomePageQuestions extends React.Component {
           myItemName: " HI898",
          })}
          />
-      
+      <UpvoteCounter upvote_number = {10}></UpvoteCounter>
           </View>
 
       

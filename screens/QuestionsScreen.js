@@ -28,13 +28,13 @@ export default class QuestionsScreen extends React.Component {
     var nav = this.props.navigation; 
     let arr = []
 
-      firebase.database().ref('Users/').on('value', function (snapshot) {
+      firebase.database().ref('Questions/').on('value', function (snapshot) {
         console.log("SNAP",snapshot.val())
         for (var key in snapshot.val()){
           
         arr.unshift(<HomePageQuestions 
           navigation = {nav} key = {1} 
-          my_comment = {snapshot.val()[key].email} ></HomePageQuestions>);
+          my_comment = {snapshot.val()[key].questionText} ></HomePageQuestions>);
         }
         
       });
@@ -47,11 +47,13 @@ export default class QuestionsScreen extends React.Component {
 
 
   render() {
+    var my_arr = this.createListOfStuff()
     return (
       <View style={{flex: 1}}>
         {!this.state.mapMode ? 
         <MapScreen/> : 
-        <LinksScreen  navigation = {this.props.navigation} my_questions = {this.createListOfStuff()}/>}
+        <LinksScreen  navigation = {this.props.navigation} 
+        my_questions = {my_arr}/>}
 
 
         <AwesomeButtonBlue 

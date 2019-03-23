@@ -40,7 +40,8 @@ export default class NewQuestionScreen extends React.Component {
           />
         </View>
         <View style={formStyles.submitButton}>
-          <Button block title="Submit" onPress={() => this.submit()}>
+          <Button block title="Submit" onPress={() => {this.submit()
+          this.props.navigation.goBack(null)}}>
             <Text>Submit</Text>
           </Button>
         </View>
