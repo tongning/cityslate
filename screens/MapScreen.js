@@ -16,7 +16,7 @@ export default class MapScreen extends React.Component {
     let arr = []
     markers = []
 
-    firebase.database().ref('Questions/').on('value', function (snapshot) {
+    firebase.database().ref('Questions/').once('value', function (snapshot) {
       console.log("SNAP", snapshot.val())
       for (var key in snapshot.val()) {
         /*
