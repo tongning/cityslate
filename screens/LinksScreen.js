@@ -49,14 +49,6 @@ export default class LinksScreen extends React.Component {
            
         
       </ScrollView>
-      <Button
-          style = {styles.submitButton}
-             title="+Add A question"
-             color="#841584"
-             onPress={() => {
-              Alert.alert('You tapped the button!');
-            }}
-             />
     </View>
     );
   }

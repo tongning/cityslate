@@ -5,6 +5,8 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AwesomeButton from "react-native-really-awesome-button";
 import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blue'
+import MapScreen from './MapScreen';
+import LinksScreen from './LinksScreen';
 
 export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
@@ -24,9 +26,10 @@ export default class QuestionsScreen extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        
+        {this.state.mapMode ? <MapScreen/> : <LinksScreen/>}
+
         <AwesomeButtonBlue 
-            raiseLevel="0" 
+            raiseLevel={0}
             onPress={next => this.setState({mapMode : !this.state.mapMode})}>
             {this.state.mapMode ? "Map" : "List"}
         </AwesomeButtonBlue>
