@@ -7,7 +7,6 @@ import MapScreen from '../screens/MapScreen';
 import QuestionScreen from '../screens/QuestionScreen';
 import firebase from '../firebase.js'; // <--- add this line
 
-
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
