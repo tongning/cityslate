@@ -27,33 +27,34 @@ export default class QuestionsScreen extends React.Component {
 
   callback = (snapshot) => {
     var nav = this.props.navigation;
-    let arr = []
-    console.log("SNAP", snapshot.val())
-      let keyidx = 0;
-      for (var key in snapshot.val()) {
+    let arr = {};
+    snapshot.forEach(function(snapshot){
+      let key = childSnapshot.key;
+      let childData = childSnapshot.val();
+      console.log(childData);
+      arr[key] = childData;
+    });
 
-        arr.unshift(<HomePageQuestions
-          navigation={nav} key={keyidx}
-          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
-        keyidx++;
-      }
+    // let arr = []
+    // console.log("SNAP", snapshot.val())
+    //   let keyidx = 0;
+    //   for (var key in snapshot.val()) {
+
+    //     arr.unshift(<HomePageQuestions
+    //       navigation={nav} key={keyidx}
+    //       my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
+    //     keyidx++;
+    //   }
       this.setState({dbCallComplete: true, questions: arr})
   }
 
-  createListOfStuff = () => {
-    var nav = this.props.navigation;
-    let arr = []
 
-    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
-
-    return arr;
-  }
   switchMode() {
       this.setState({mapMode : !this.state.mapMode});
   }
 
   componentDidMount(){
-    this.createListOfStuff();
+    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
   render() {
     //var my_arr = this.createListOfStuff()
@@ -64,7 +65,9 @@ export default class QuestionsScreen extends React.Component {
         {!this.state.mapMode ? 
         <MapScreen/> : 
         <LinksScreen  navigation = {this.props.navigation} 
-        my_questions = {!this.state.dbCallComplete ? null : this.state.questions}/>}
+        my_questions = {!this.state.dbCallComplete ? null : 
+        this.state.questions.forEach(question => 
+          <HomePageQuestions data={question} ></HomePageQuestions>)}/>}
 
 
         <AwesomeButtonBlue 
