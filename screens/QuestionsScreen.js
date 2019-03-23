@@ -25,22 +25,22 @@ export default class QuestionsScreen extends React.Component {
 
 
   createListOfStuff = () => {
-    var nav = this.props.navigation; 
+    var nav = this.props.navigation;
     let arr = []
 
-      firebase.database().ref('Questions/').on('value', function (snapshot) {
-        console.log("SNAP",snapshot.val())
-        for (var key in snapshot.val()){
-          
-        arr.unshift(<HomePageQuestions 
-          navigation = {nav} key = {1} 
-          my_comment = {snapshot.val()[key].questionText} ></HomePageQuestions>);
-        }
-        
-      });
-    
+    firebase.database().ref('Questions/').on('value', function (snapshot) {
+      console.log("SNAP", snapshot.val())
+      for (var key in snapshot.val()) {
+
+        arr.unshift(<HomePageQuestions
+          navigation={nav} key={1}
+          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
+      }
+
+    });
+
     return arr;
-}
+  }
   switchMode() {
       this.setState({mapMode : !this.state.mapMode});
   }

@@ -3,14 +3,46 @@ import { MapView, Location} from 'expo';
 import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import firebase from '../firebase.js'; // <--- add this line
+
 
 export default class MapScreen extends React.Component {
   static navigationOptions = {
     title: 'Maps',
   };
 
+  createListOfStuff = () => {
+    var nav = this.props.navigation;
+    let arr = []
+    markers = []
+
+    firebase.database().ref('Questions/').on('value', function (snapshot) {
+      console.log("SNAP", snapshot.val())
+      for (var key in snapshot.val()) {
+        /*
+        arr.unshift(<HomePageQuestions
+          navigation={nav} key={1}
+          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);*/
+        markers.unshift(
+          {
+            latlng: {
+              latitude: snapshot.val()[key].lat,
+              longitude: snapshot.val()[key].lon
+            },
+            title:snapshot.val()[key].questionText
+          
+          })
+      }
+
+    });
+
+    return markers;
+  }
+
   constructor(props){
     super(props);
+    result = this.createListOfStuff();
+
     this.state = {
       region: {
         latitude: 38.915574,
@@ -19,16 +51,7 @@ export default class MapScreen extends React.Component {
         longitudeDelta: 0.0421,
       },
       flex: 0,
-      markers: [
-        {
-          latlng: {
-            latitude: 38.910950,
-            longitude: -77.044617
-          }, 
-          title: "My Marker",
-          description: "Description"
-        }
-      ],
+      markers: result,
       showMarkers: false
     };
   }

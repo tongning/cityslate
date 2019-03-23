@@ -22,7 +22,7 @@ export default class NewQuestionScreen extends React.Component {
         console.log('FORM VALUES', formValues);
         this.writeQuestionData(formValues['question_text'])
     }
-
+  
     writeQuestionData(questionText) {
         lat = this.state.region.latitude;
         lon = this.state.region.longitude;
@@ -37,7 +37,6 @@ export default class NewQuestionScreen extends React.Component {
             console.log('error ', error)
         })
     }
-
     componentDidMount() {
         setTimeout(() => 
             this.setState({flex: 1, showMarkers: true}) , 500);
