@@ -26,11 +26,12 @@ export default class QuestionsScreen extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        {this.state.mapMode ? <MapScreen/> : <LinksScreen/>}
+        {!this.state.mapMode ? <MapScreen/> : <LinksScreen/>}
 
         <AwesomeButtonBlue 
             raiseLevel={0}
-            onPress={next => this.setState({mapMode : !this.state.mapMode})}>
+            onPress={next => this.setState({mapMode : !this.state.mapMode})}
+            style={styles.toggleButton}>
             {this.state.mapMode ? "Map" : "List"}
         </AwesomeButtonBlue>
 
@@ -57,6 +58,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   toggleButton: {
-      width: 40,
+      position: "absolute",
+      margin: 10,
+      bottom:0
   }
 });
