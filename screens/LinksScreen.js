@@ -25,13 +25,8 @@ export default class LinksScreen extends React.Component {
       console.log('error ', error)
     })
   }
-
-
-
-
   render() {
-    this.writeUserData("A","B","C");
-    return (
+   return (
       <View style={{flex:1}}>
       <ScrollView style={styles.container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your

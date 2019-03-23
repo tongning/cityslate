@@ -22,19 +22,22 @@ export default class QuestionsScreen extends React.Component {
       mapMode : true,
     };
   }
+
+
   createListOfStuff = () => {
     var nav = this.props.navigation; 
     let arr = []
-    firebase.database().ref('Users/').on('value', function (snapshot) {
-      console.log("SNAP",snapshot.val())
-      for (var key in snapshot.val()){
-        
-      arr.push(<HomePageQuestions 
-        navigation = {nav} key = {1} 
-        my_comment = {snapshot.val()[key].email} ></HomePageQuestions>);
-      }
-    });
 
+      firebase.database().ref('Users/').on('value', function (snapshot) {
+        console.log("SNAP",snapshot.val())
+        for (var key in snapshot.val()){
+          
+        arr.unshift(<HomePageQuestions 
+          navigation = {nav} key = {1} 
+          my_comment = {snapshot.val()[key].email} ></HomePageQuestions>);
+        }
+        
+      });
     
     return arr;
 }
@@ -46,7 +49,8 @@ export default class QuestionsScreen extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        {!this.state.mapMode ? <MapScreen/> : 
+        {!this.state.mapMode ? 
+        <MapScreen/> : 
         <LinksScreen  navigation = {this.props.navigation} my_questions = {this.createListOfStuff()}/>}
 
         <AwesomeButtonBlue 
