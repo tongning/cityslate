@@ -19,41 +19,52 @@ export default class QuestionsScreen extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      dbCallComplete: false,
       mapMode : true,
+      questions : null
     };
   }
 
+  callback = (snapshot) => {
+    var nav = this.props.navigation;
+    let arr = []
+    console.log("SNAP", snapshot.val())
+      let keyidx = 0;
+      for (var key in snapshot.val()) {
+
+        arr.unshift(<HomePageQuestions
+          navigation={nav} key={keyidx}
+          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
+        keyidx++;
+      }
+      this.setState({dbCallComplete: true, questions: arr})
+  }
 
   createListOfStuff = () => {
-    var nav = this.props.navigation; 
+    var nav = this.props.navigation;
     let arr = []
 
-      firebase.database().ref('Questions/').on('value', function (snapshot) {
-        console.log("SNAP",snapshot.val())
-        for (var key in snapshot.val()){
-          
-        arr.unshift(<HomePageQuestions 
-          navigation = {nav} key = {1} 
-          my_comment = {snapshot.val()[key].questionText} ></HomePageQuestions>);
-        }
-        
-      });
-    
+    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
+
     return arr;
-}
+  }
   switchMode() {
       this.setState({mapMode : !this.state.mapMode});
   }
 
-
+  componentDidMount(){
+    this.createListOfStuff();
+  }
   render() {
-    var my_arr = this.createListOfStuff()
+    //var my_arr = this.createListOfStuff()
+    //console.log("IDK",my_arr);
+
     return (
       <View style={{flex: 1}}>
         {!this.state.mapMode ? 
         <MapScreen/> : 
         <LinksScreen  navigation = {this.props.navigation} 
-        my_questions = {my_arr}/>}
+        my_questions = {!this.state.dbCallComplete ? null : this.state.questions}/>}
 
 
         <AwesomeButtonBlue 
