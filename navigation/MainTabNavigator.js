@@ -47,7 +47,8 @@ MapStack.navigationOptions = {
 };
 
 const QuestionsStack = createStackNavigator({
-  Question: QuestionsScreen,
+  Questions: QuestionsScreen,
+  Question:QuestionScreen,
 });
 
 QuestionsStack.navigationOptions = {
@@ -60,21 +61,6 @@ QuestionsStack.navigationOptions = {
           ? `ios-information-circle${focused ? '' : '-outline'}`
           : 'md-information-circle'
       }
-    />
-  ),
-};
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-  Question:QuestionScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
     />
   ),
 };
