@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, StatusBar, Text, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon, Permissions, Constants, Location } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-
+import firebase from 'firebase';
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -19,22 +19,9 @@ export default class App extends React.Component {
     }
   }
 
-  /* render() {
-    let text = 'Waiting..';
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
-    }
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-      </View>
-    );
-  } */
 
   render() {
+    
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
