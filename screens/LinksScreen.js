@@ -15,7 +15,7 @@ export default class LinksScreen extends React.Component {
     var num_posts = 100
     for (var i = 0; i < num_posts; i++) {
         
-        arr.push(<HomePageQuestions my_comment = "this is comment yo" ></HomePageQuestions>);
+        arr.push(<HomePageQuestions key = {i} my_comment = "this is comment yo" ></HomePageQuestions>);
         
     }
     return arr;
