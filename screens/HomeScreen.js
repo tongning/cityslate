@@ -14,10 +14,6 @@ import MapScreen from './MapScreen';
 
 export default class App extends Component {
 
-  static navigationOptions = {
-    title: 'Links',
-  };
-
   constructor(props) {
     super(props);
     this.state = {};
