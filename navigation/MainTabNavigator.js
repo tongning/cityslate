@@ -11,6 +11,9 @@ import QuestionsScreen from '../screens/QuestionsScreen';
 import QuestionScreen from '../screens/QuestionScreen';
 import NewQuestionScreen from '../screens/NewQuestionScreen';
 
+
+console.disableYellowBox = true;
+
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
@@ -86,5 +89,4 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   QuestionsStack,
-  SettingsStack,
 });

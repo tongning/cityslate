@@ -22,12 +22,14 @@ export default class NewQuestionScreen extends React.Component {
         console.log('FORM VALUES', formValues);
         this.writeQuestionData(formValues['question_text'])
     }
-
+  
     writeQuestionData(questionText) {
         lat = this.state.region.latitude;
         lon = this.state.region.longitude;
-        firebase.database().ref('Questions/').push({
-            questionText, lat, lon
+        upvotes = 0;
+        username = "Wisley Won"
+        firebase.database().ref('Questions').push({
+            questionText, lat, lon, upvotes, username
         }).then((data) => {
             //success callback
             console.log('data ', data)
@@ -36,7 +38,6 @@ export default class NewQuestionScreen extends React.Component {
             console.log('error ', error)
         })
     }
-
     componentDidMount() {
         setTimeout(() => 
             this.setState({flex: 1, showMarkers: true}) , 500);
@@ -67,7 +68,8 @@ export default class NewQuestionScreen extends React.Component {
           />
         </View>
         <View style={formStyles.submitButton}>
-          <Button block title="Submit" onPress={() => this.submit()}>
+          <Button block title="Submit" onPress={() => {this.submit()
+          this.props.navigation.goBack(null)}}>
             <Text>Submit</Text>
           </Button>
         </View>

@@ -3,14 +3,60 @@ import { MapView, Location} from 'expo';
 import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import firebase from '../firebase.js'; // <--- add this line
+import haversine from 'haversine';
 
 export default class MapScreen extends React.Component {
   static navigationOptions = {
     title: 'Maps',
   };
 
+  createListOfStuff = () => {
+    var nav = this.props.navigation;
+    let arr = []
+    markers = []
+
+    firebase.database().ref('Questions/').once('value', function (snapshot) {
+      console.log("SNAP", snapshot.val())
+      for (var key in snapshot.val()) {
+        /*
+        arr.unshift(<HomePageQuestions
+          navigation={nav} key={1}
+          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);*/
+        // Only include markers within 5 miles
+       
+        const start = {
+          latitude: snapshot.val()[key].lat,
+          longitude: snapshot.val()[key].lon
+        }
+
+        const end = {
+          latitude: 38.900136,
+          longitude: -77.046731
+        }
+        
+        distMiles = haversine(start, end, { unit: 'mile' });
+        if (distMiles <= 5) {
+          markers.unshift(
+            {
+              latlng: {
+                latitude: snapshot.val()[key].lat,
+                longitude: snapshot.val()[key].lon
+              },
+              title: snapshot.val()[key].questionText
+
+            })
+        }
+      }
+
+    });
+
+    return markers;
+  }
+
   constructor(props){
     super(props);
+
     this.state = {
       region: {
         latitude: 38.915574,
@@ -19,16 +65,7 @@ export default class MapScreen extends React.Component {
         longitudeDelta: 0.0421,
       },
       flex: 0,
-      markers: [
-        {
-          latlng: {
-            latitude: 38.910950,
-            longitude: -77.044617
-          }, 
-          title: "My Marker",
-          description: "Description"
-        }
-      ],
+      markers: [],
       showMarkers: false
     };
   }
@@ -51,6 +88,7 @@ export default class MapScreen extends React.Component {
   }
 
   render() {
+    
     return (
       <View style={{flex: 1}}>
         <MapView
