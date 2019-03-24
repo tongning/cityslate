@@ -45,6 +45,7 @@ export default class QuestionsScreen extends React.Component {
     firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
 
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -55,7 +56,8 @@ export default class QuestionsScreen extends React.Component {
           <LinksScreen  navigation = {this.props.navigation} 
         my_questions = {!this.state.dbCallComplete ? null : 
           Object.keys(this.state.questions).map(question => 
-          <HomePageQuestions data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
+          <HomePageQuestions  navigation = {this.props.navigation}  
+          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
         </View>
         
         <AwesomeButtonBlue 
