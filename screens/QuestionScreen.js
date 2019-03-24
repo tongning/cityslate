@@ -45,7 +45,7 @@ export default class QuestionScreen extends React.Component {
        return (
       <View style={{flex:1}}>
      <Image source={{uri: "https://facebook.github.io/react-native/img/favicon.png", width: 64, height: 64}} />
-     <Text style={{fontSize: 20}} >HELLOW {this.props.navigation.state.params.myItemName.questionText} </Text>
+     <Text style={{fontSize: 20}} >{this.props.navigation.state.params.myItemName} </Text>
      <GiftedChat
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
