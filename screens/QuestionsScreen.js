@@ -13,7 +13,7 @@ const {height, width} = Dimensions.get('window');
 
 export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Questions',
+    title: 'Explore',
   };
 
   constructor(props){
