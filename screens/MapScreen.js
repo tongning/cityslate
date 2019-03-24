@@ -4,7 +4,7 @@ import {View, StyleSheet, TouchableHighlight, Text} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import firebase from '../firebase.js'; // <--- add this line
-
+import haversine from 'haversine';
 
 export default class MapScreen extends React.Component {
   static navigationOptions = {
@@ -23,15 +23,30 @@ export default class MapScreen extends React.Component {
         arr.unshift(<HomePageQuestions
           navigation={nav} key={1}
           my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);*/
-        markers.unshift(
-          {
-            latlng: {
-              latitude: snapshot.val()[key].lat,
-              longitude: snapshot.val()[key].lon
-            },
-            title:snapshot.val()[key].questionText
-          
-          })
+        // Only include markers within 5 miles
+       
+        const start = {
+          latitude: snapshot.val()[key].lat,
+          longitude: snapshot.val()[key].lon
+        }
+
+        const end = {
+          latitude: 38.900136,
+          longitude: -77.046731
+        }
+        
+        distMiles = haversine(start, end, { unit: 'mile' });
+        if (distMiles <= 5) {
+          markers.unshift(
+            {
+              latlng: {
+                latitude: snapshot.val()[key].lat,
+                longitude: snapshot.val()[key].lon
+              },
+              title: snapshot.val()[key].questionText
+
+            })
+        }
       }
 
     });

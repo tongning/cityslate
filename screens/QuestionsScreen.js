@@ -50,7 +50,6 @@ export default class QuestionsScreen extends React.Component {
     this.refs.map.setState({markers : markers});
   }
 
-
   switchMode() {
       this.setState({mapMode : !this.state.mapMode});
   }
@@ -58,6 +57,7 @@ export default class QuestionsScreen extends React.Component {
   componentDidMount(){
     firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
+
 
   render() {
     return (
@@ -69,7 +69,8 @@ export default class QuestionsScreen extends React.Component {
           <LinksScreen  navigation = {this.props.navigation} 
         my_questions = {!this.state.dbCallComplete ? null : 
           Object.keys(this.state.questions).map(question => 
-          <HomePageQuestions data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
+          <HomePageQuestions  navigation = {this.props.navigation}  
+          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
         </View>
         
         {/* <AwesomeButtonBlue 
