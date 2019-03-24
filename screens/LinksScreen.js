@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import {View, Text, Image, Button,Alert} from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
@@ -13,16 +13,29 @@ export default class LinksScreen extends React.Component {
   };
   constructor(props){
     super(props);
-   
+    this.state = {
+      refreshing: false,
+      questions: []
+    }
   }
 
   render() {
+    var _onRefresh = () => {
+      this.setState({refreshing: true});
+      this.props.refreshCallback();
+    }
    return (
       <View style={{flex:1}}>
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}   
-           {this.props.my_questions}
+      <ScrollView style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={_onRefresh}
+          />
+        }>
+        {Object.keys(this.state.questions).map(question => 
+          <HomePageQuestions  navigation = {this.props.navigation}  
+          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}
         
       </ScrollView>
     </View>

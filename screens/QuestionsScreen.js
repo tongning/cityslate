@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View, StyleSheet, Dimensions, Button} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AwesomeButton from "react-native-really-awesome-button";
@@ -8,7 +8,6 @@ import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blu
 import MapScreen from './MapScreen';
 import LinksScreen from './LinksScreen';
 import firebase from '../firebase.js'; // <--- add this line
-import HomePageQuestions from '../components/HomePageQuestions';
 
 const {height, width} = Dimensions.get('window');
 
@@ -34,7 +33,6 @@ export default class QuestionsScreen extends React.Component {
       console.log(childData);
       arr[key] = childData;
     });
-    this.setState({dbCallComplete: true, questions: arr})
 
     let markers = [];
     Object.keys(arr).map((question) => 
@@ -48,6 +46,11 @@ export default class QuestionsScreen extends React.Component {
       })
     )
     this.refs.map.setState({markers : markers});
+    this.refs.list.setState({questions : arr, refreshing: false});
+  }
+
+  refreshData = () => {
+    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
 
   switchMode() {
@@ -55,7 +58,7 @@ export default class QuestionsScreen extends React.Component {
   }
 
   componentDidMount(){
-    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
+    this.refreshData();
   }
 
 
@@ -66,11 +69,9 @@ export default class QuestionsScreen extends React.Component {
 
         <View style={styles.overlay}>
           <View style={styles.header}></View>
-          <LinksScreen  navigation = {this.props.navigation} 
-        my_questions = {!this.state.dbCallComplete ? null : 
-          Object.keys(this.state.questions).map(question => 
-          <HomePageQuestions  navigation = {this.props.navigation}  
-          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
+          <LinksScreen ref="list"
+          refreshCallback = {this.refreshData.bind(this)}
+          navigation = {this.props.navigation} />
         </View>
         
         {/* <AwesomeButtonBlue 
