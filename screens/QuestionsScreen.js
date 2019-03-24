@@ -34,7 +34,6 @@ export default class QuestionsScreen extends React.Component {
       console.log(childData);
       arr[key] = childData;
     });
-    this.setState({dbCallComplete: true, questions: arr})
 
     let markers = [];
     Object.keys(arr).map((question) => 
@@ -48,6 +47,12 @@ export default class QuestionsScreen extends React.Component {
       })
     )
     this.refs.map.setState({markers : markers});
+    this.refs.list.setState({questions : arr, refreshing: false});
+  }
+
+  refreshData = () => {
+    console.log("Refresh");
+    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
 
   switchMode() {
@@ -55,7 +60,7 @@ export default class QuestionsScreen extends React.Component {
   }
 
   componentDidMount(){
-    firebase.database().ref('Questions/').once('value', this.callback.bind(this));
+    this.refreshData();
   }
 
 
@@ -66,11 +71,9 @@ export default class QuestionsScreen extends React.Component {
 
         <View style={styles.overlay}>
           <View style={styles.header}></View>
-          <LinksScreen  navigation = {this.props.navigation} 
-        my_questions = {!this.state.dbCallComplete ? null : 
-          Object.keys(this.state.questions).map(question => 
-          <HomePageQuestions  navigation = {this.props.navigation}  
-          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
+          <LinksScreen ref="list"
+          refreshCallback = {this.refreshData.bind(this)}
+          navigation = {this.props.navigation} />
         </View>
         
         {/* <AwesomeButtonBlue 
