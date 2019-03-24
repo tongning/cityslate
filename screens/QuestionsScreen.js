@@ -34,7 +34,20 @@ export default class QuestionsScreen extends React.Component {
       console.log(childData);
       arr[key] = childData;
     });
-      this.setState({dbCallComplete: true, questions: arr})
+    this.setState({dbCallComplete: true, questions: arr})
+
+    let markers = [];
+    Object.keys(arr).map((question) => 
+      markers.push({
+        latlng: {
+          latitude: arr[question].lat,
+          longitude: arr[question].lon
+        },
+        title:arr[question].questionText,
+        description: question
+      })
+    )
+    this.refs.map.setState({markers : markers});
   }
 
 
@@ -49,22 +62,22 @@ export default class QuestionsScreen extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-
-        <MapScreen/>  
+        <MapScreen ref="map"/>
 
         <View style={styles.overlay}>
+          <View style={styles.header}></View>
           <LinksScreen  navigation = {this.props.navigation} 
         my_questions = {!this.state.dbCallComplete ? null : 
           Object.keys(this.state.questions).map(question => 
           <HomePageQuestions data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
         </View>
         
-        <AwesomeButtonBlue 
+        {/* <AwesomeButtonBlue 
             raiseLevel={0}
             onPress={next => this.setState({mapMode : !this.state.mapMode})}
             style={styles.toggleButton}>
             {this.state.mapMode ? "Map" : "List"}
-        </AwesomeButtonBlue>
+        </AwesomeButtonBlue> */}
 
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item buttonColor='#9b59b6' title="Add Question" onPress={() => this.props.navigation.push("NewQuestionScreen")}>
@@ -93,5 +106,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: height * 1/3,
     width: width,
+  }, 
+  header: {
+    height: 200,
+    width: width,
+    color: 'blue',
+    position: "absolute",
+    top: 0
   }
 });

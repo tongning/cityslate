@@ -41,7 +41,6 @@ export default class MapScreen extends React.Component {
 
   constructor(props){
     super(props);
-    result = this.createListOfStuff();
 
     this.state = {
       region: {
@@ -51,7 +50,7 @@ export default class MapScreen extends React.Component {
         longitudeDelta: 0.0421,
       },
       flex: 0,
-      markers: result,
+      markers: [],
       showMarkers: false
     };
   }
@@ -74,6 +73,7 @@ export default class MapScreen extends React.Component {
   }
 
   render() {
+    
     return (
       <View style={{flex: 1}}>
         <MapView
