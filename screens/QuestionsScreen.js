@@ -102,12 +102,10 @@ export default class QuestionsScreen extends React.Component {
             <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={buttonSize} color="blue" />
           </TouchableOpacity>
 
-          <View style={{top:-20, height:height}}>
             <LinksScreen ref="list"
             focusCallback={this.focusMarker.bind(this)}
             refreshCallback = {this.refreshData.bind(this)}
             navigation = {this.props.navigation} />
-          </View>
         </Animated.View>
 
         <ActionButton buttonColor="rgba(231,76,60,1)">
