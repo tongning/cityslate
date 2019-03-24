@@ -102,14 +102,9 @@ export default class MapScreen extends React.Component {
             <MapView.Marker
               coordinate={marker.latlng}
               title={marker.title}
-              description={marker.description}>
+              onPress={this.props.focusCallback.bind(null, marker.description)}>
 
-                <MapView.Callout tooltip>
-                <TouchableHighlight  underlayColor='#dddddd'>
-                                          <View>
-                                              <Text>{marker.title}{"\n"}{marker.description}</Text>
-                                          </View>
-                                      </TouchableHighlight>
+                <MapView.Callout>
                 </MapView.Callout>
             </MapView.Marker>
           )) : null}

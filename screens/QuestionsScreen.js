@@ -82,10 +82,14 @@ export default class QuestionsScreen extends React.Component {
     this.setState({expanded: !this.state.expanded});
   }
 
+  focusItem(key){
+    this.refs.list.scrollToQuestion(key);
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
-        <MapScreen ref="map"/>
+        <MapScreen ref="map" focusCallback={this.focusItem.bind(this)}/>
 
         <Animated.View ref="overlay" style={[styles.overlay, 
           {height:this.state.overlayHeight}]}>
