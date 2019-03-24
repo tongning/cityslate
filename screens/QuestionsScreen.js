@@ -22,7 +22,7 @@ export default class QuestionsScreen extends React.Component {
       dbCallComplete: false,
       mapMode : true,
       questions : null,
-      overlayHeight: new Animated.Value(height * 1/3),
+      overlayHeight: new Animated.Value(height * 0.4),
       expanded: false,
     };
   }
@@ -66,7 +66,7 @@ export default class QuestionsScreen extends React.Component {
   _expand(){
     if(this.state.expanded){
       Animated.timing(this.state.overlayHeight, {
-        toValue: height * 1/3,
+        toValue: height * 0.4,
         velocity: 3,
         overshootClamping: true
       }).start();
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   overlay: {
     position: "absolute",
     bottom: 0,
-    height: height * 0.3,
+    height: height * 0.4,
     width: width,
     backgroundColor: 'lightblue'
   }, 

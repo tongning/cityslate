@@ -47,8 +47,8 @@ export default class QuestionScreen extends React.Component {
     
      <Text style={{fontSize: 20}} >
      <Image source={{uri: "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", 
-      width: 40, 
-      height: 40,}} />
+      width:32, 
+      height:32,}} />
      {this.props.navigation.state.params.myItemName}
       </Text>
      <GiftedChat
