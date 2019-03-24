@@ -101,10 +101,13 @@ export default class QuestionsScreen extends React.Component {
             style={styles.toggleButton}>
             <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={buttonSize} color="blue" />
           </TouchableOpacity>
-          <LinksScreen ref="list"
-          focusCallback={this.focusMarker.bind(this)}
-          refreshCallback = {this.refreshData.bind(this)}
-          navigation = {this.props.navigation} />
+
+          <View style={{top:-20, height:height}}>
+            <LinksScreen ref="list"
+            focusCallback={this.focusMarker.bind(this)}
+            refreshCallback = {this.refreshData.bind(this)}
+            navigation = {this.props.navigation} />
+          </View>
         </Animated.View>
 
         <ActionButton buttonColor="rgba(231,76,60,1)">
@@ -127,7 +130,7 @@ const styles = StyleSheet.create({
   toggleButton: {
       position: "relative",
       //margin: 10,
-      top:buttonSize/2,
+      top: -1 * buttonSize/2,
       width: width / 2 + buttonSize/2,
       backgroundColor: 'rgba(52, 52, 52, 0)',
       alignItems: 'flex-end',
@@ -138,6 +141,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     width: width,
+    color: 'lightgray',
+    backgroundColor: 'lightgray'
   }, 
   header: {
     height: 200,

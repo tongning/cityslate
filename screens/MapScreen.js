@@ -19,10 +19,6 @@ export default class MapScreen extends React.Component {
     firebase.database().ref('Questions/').once('value', function (snapshot) {
       console.log("SNAP", snapshot.val())
       for (var key in snapshot.val()) {
-        /*
-        arr.unshift(<HomePageQuestions
-          navigation={nav} key={1}
-          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);*/
         // Only include markers within 5 miles
        
         const start = {
