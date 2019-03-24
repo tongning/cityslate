@@ -5,6 +5,7 @@ import {ScrollIntoView, wrapScrollView} from 'react-native-scroll-into-view'
 
 
 
+
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
@@ -13,13 +14,19 @@ export default class LinksScreen extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
-      questions: []
+      questions: [],
+      activeItem: null
     }
   }
 
 
   scrollToQuestion(key){
     this.refs[key].scrollIntoView();
+    if(this.state.activeItem){
+      this.state.activeItem.unfocusColor();
+    }
+    this.state.activeItem = this.refs[key + "_child"];
+    this.state.activeItem.focusColor();
   }
 
   render() {
@@ -38,7 +45,7 @@ export default class LinksScreen extends React.Component {
             onRefresh={_onRefresh}
           />
         }>
-        {Object.keys(this.state.questions).map(question => <ScrollIntoView ref={question}><HomePageQuestions focusCallback={this.props.focusCallback}  navigation = {this.props.navigation}  
+        {Object.keys(this.state.questions).map(question => <ScrollIntoView ref={question}><HomePageQuestions ref={question + "_child"} focusCallback={this.props.focusCallback}  navigation = {this.props.navigation}  
       data={this.state.questions[question]} my_key = {question} ></HomePageQuestions></ScrollIntoView>)}
         
       </CustomScrollView>
