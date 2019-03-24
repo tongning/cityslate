@@ -10,6 +10,7 @@ import firebase from '../firebase.js'; // <--- add this line
 import { Ionicons } from '@expo/vector-icons';
 
 const {height, width} = Dimensions.get('window');
+const buttonSize = 70;
 
 export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
@@ -91,7 +92,7 @@ export default class QuestionsScreen extends React.Component {
           <TouchableOpacity 
             onPress={next => this._expand()}
             style={styles.toggleButton}>
-            <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={50} color="blue" />
+            <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={buttonSize} color="blue" />
           </TouchableOpacity>
           <LinksScreen ref="list"
           refreshCallback = {this.refreshData.bind(this)}
@@ -116,11 +117,14 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   toggleButton: {
-      //position: "absolute",
+      position: "relative",
       //margin: 10,
-      //top:0,
-      width: width,
-      backgroundColor: 'rgba(52, 52, 52, 0)'
+      top:buttonSize/2,
+      width: width / 2 + buttonSize/2,
+      backgroundColor: 'rgba(52, 52, 52, 0)',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      zIndex: 4,
   }, 
   overlay: {
     position: "absolute",
