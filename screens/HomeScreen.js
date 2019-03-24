@@ -26,7 +26,7 @@ export default class App extends Component {
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-        <Image style={styles.logo} source={require("../assets/images/logo.png")} resizeMode='contain'/>
+        <Image style={styles.logo} source={require("../assets/images/logo2.png")} resizeMode='contain'/>
         <Text style={styles.header}>CitySlate</Text>
         <KeyboardAwareScrollView>
           <View style={styles.textInput}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 50,
-    fontFamily:'monospace',
+    fontFamily:'sans-serif',
     color: 'lightblue',
     marginBottom: 20,
   },
@@ -105,29 +105,33 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   btnView: {
-    marginTop: 25,
-    height: 55,
+    padding:10,
+    marginTop: 20,
+    height: undefined,
     width: width-40,
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 25,
     justifyContent: 'center',
     backgroundColor: 'lightblue',
   },
   icon: {
+    
     width: 25,
     height: 25,
     marginRight: 15,
   },
   textInput: {
-    fontFamily:'monospace',
-    height:55,
-    flex:1,
+    alignItems:"center",
+    fontFamily:'sans-serif',
+    height:undefined,
     width: width-40,
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 25,
     flexDirection: 'row',
-    borderWidth: 0.5,
+    //borderWidth: 0.5,
     paddingLeft: 15,
+    paddingTop:15,
+    paddingBottom:15,
     paddingRight: 15,
     marginBottom: 10,
     backgroundColor: 'lightgray',

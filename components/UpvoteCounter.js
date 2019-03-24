@@ -35,7 +35,7 @@ export default class UpvoteCounter extends React.Component {
                   databaseRef.transaction(function(upvotes) {return (upvotes || 0) + 1; });
                   }}
               >
-              <Text style={{color: 'white', fontSize: 12,}}>{this.state.textValue.toString()}</Text>
+              <Text style={{color: 'white', fontSize: 16,}}>{this.state.textValue.toString()}</Text>
             </TouchableOpacity>
           </View>
       );
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 50,
-    fontFamily:'monospace',
+    fontFamily:'sans-serif',
     color: 'lightblue',
     marginBottom: 20,
   },
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
   },
   btnView: {
     //margin:10,
-    height: 25,
+    height: 50,
     //marginTop:10,
     //marginBottom:10,
-    width: 25,
+    width: 30,
     alignItems: 'center',
-    borderRadius: 25,
+    borderRadius: 20,
     justifyContent: 'space-evenly',
     backgroundColor: 'lightgreen',
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   textInput: {
-    fontFamily:'monospace',
+    fontFamily:'sans-serif',
     height:55,
     flex:1,
     width: width-40,

@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 50,
-    fontFamily:'monospace',
+    fontFamily:'sans-serif',
     color: 'lightblue',
     marginBottom: 20,
   },
@@ -85,7 +85,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   btnView: {
-    margin:10,
+    marginLeft:5,
+    marginRight:5,
+    marginTop:10,
+    marginBottom:10,
     height: undefined,
     width: width*0.7,
     
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   textInput: {
-    fontFamily:'monospace',
+    fontFamily:'sans-serif',
     height:55,
     flex:1,
     width: width-40,

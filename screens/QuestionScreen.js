@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import {View, Text, Image, Button,Alert} from 'react-native';
+import {View, Text, Image, Button,TouchableOpacity, Dimensions} from 'react-native';
 import MainTabNavigator from '../navigation/MainTabNavigator'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { GiftedChat } from 'react-native-gifted-chat'
@@ -46,7 +46,9 @@ export default class QuestionScreen extends React.Component {
       <View style={{flex:1}}>
     
      <Text style={{fontSize: 20}} >
-     <Image source={{uri: "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", width: 32, height: 32}} />
+     <Image source={{uri: "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", 
+      width: 40, 
+      height: 40,}} />
      {this.props.navigation.state.params.myItemName}
       </Text>
      <GiftedChat
@@ -57,15 +59,46 @@ export default class QuestionScreen extends React.Component {
         }}
       />
 
-     <Button  
-           color="#ff5c5c"
-          title="GO BACK"
-         onPress={() => this.props.navigation.goBack(null)}
-         />
+        <TouchableOpacity
+          style={styles.btnView}
+          activeOpacity={0.8}
+          onPress={() => this.props.navigation.goBack(null)}
+          >
+          <Text style={{
+              padding: 10,
+              color: 'white',
+              fontSize: 25,
+              fontFamily:'sans-serif'
+            }}>Go Back</Text>
+        </TouchableOpacity>
       
     </View>
     );
   }
 }
 
+const {height, width} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+
+  container: {
+    alignItems: 'center',
+    margin: 10,
+    flexDirection: 'row'
+  },
+  btnView: {
+    height: undefined,
+    width: width,
+    alignItems: 'center',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    justifyContent: 'center',
+    backgroundColor: 'gray',
+  },
+  icon: {
+    width: 25,
+    height: 25,
+    marginRight: 15,
+  }
+});
 

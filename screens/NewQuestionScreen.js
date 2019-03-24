@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet,TouchableOpacity,Dimensions,KeyboardAvoidingView } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 import {View, Text, Image, Button,Alert} from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
@@ -58,30 +58,93 @@ export default class NewQuestionScreen extends React.Component {
     render() {
         //this.writeUserData("A","B","C");
         return (
-            <View style={formStyles.wrapper}>
-        <View>
+            <KeyboardAvoidingView style={formStyles.wrapper}>
+        <KeyboardAvoidingView>
           <GenerateForm
             ref={(c) => {
               this.formGenerator = c;
             }}
             fields={fields}
           />
-        </View>
-        <View style={formStyles.submitButton}>
-          <Button block title="Submit" onPress={() => {this.submit()
-          this.props.navigation.goBack(null)}}>
-            <Text>Submit</Text>
-          </Button>
-        </View>
-      </View>
+        </KeyboardAvoidingView>
+        <KeyboardAvoidingView >
+        <TouchableOpacity
+          style={styles.btnView}
+          activeOpacity={0.8}
+          onPress={() => {this.submit()
+            this.props.navigation.goBack(null)}}
+          >
+          <Text style={{
+              padding: 10,
+              color: 'white',
+              fontSize: 25,
+              fontFamily:'sans-serif'
+            }}>Submit</Text>
+        </TouchableOpacity>
+
+
+
+        <TouchableOpacity
+          style={styles.backView}
+          backgroundColor='red'
+          activeOpacity={0.8}
+          onPress={() => this.props.navigation.goBack(null)}
+          >
+          <Text style={{
+              padding: 10,
+              color: 'white',
+              fontSize: 25,
+              fontFamily:'sans-serif'
+            }}>Go Back</Text>
+        </TouchableOpacity>
+          
+        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
         );
     }
 }
 
+const {height, width} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+
+  container: {
+    alignItems: 'center',
+    margin: 10,
+    flexDirection: 'row'
+  },
+  btnView: {
+    height: undefined,
+    margin:20,
+    width: undefined,
+    alignItems: 'center',
+    borderRadius: 25,
+    justifyContent: 'center',
+    backgroundColor: 'lightgreen',
+  },
+
+  backView: {
+    height: undefined,
+    marginLeft:20,
+    marginRight:20,
+    width: undefined,
+    alignItems: 'center',
+    borderRadius: 25,
+    justifyContent: 'center',
+    backgroundColor: 'gray',
+  },
+  
+  icon: {
+    width: 25,
+    height: 25,
+    marginRight: 15,
+  }
+});
+
 const formStyles = {
     wrapper: {
       flex: 1,
-      marginTop: 150,
+      marginTop: height/4,
     },
     submitButton: {
       paddingHorizontal: 10,

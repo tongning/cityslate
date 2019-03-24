@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     right: 10, 
 },
 textInput: {
-  fontFamily:'monospace',
+  fontFamily:'sans-serif',
   height:55,
   flex:1,
   width: width-40,
