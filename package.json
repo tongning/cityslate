@@ -28,7 +28,8 @@
     "react-native-really-awesome-button": "^1.4.2",
     "react-native-stars": "^1.1.5",
     "react-navigation": "^3.0.9",
-    "react-upvote": "0.0.2"
+    "react-upvote": "0.0.2",
+    "rn-sliding-up-panel": "^2.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",

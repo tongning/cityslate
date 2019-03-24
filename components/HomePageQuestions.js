@@ -4,6 +4,7 @@ import UpvoteCounter from '../components/UpvoteCounter';
 import CardView from 'react-native-cardview'
 import IconWithTextBelow from '../components/IconWithTextBelow';
 
+const {height, width} = Dimensions.get('window');
 
 export default class HomePageQuestions extends React.Component {
   static navigationOptions = {

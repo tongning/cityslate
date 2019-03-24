@@ -1,13 +1,13 @@
 
 import React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions, Animated, TouchableOpacity} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AwesomeButton from "react-native-really-awesome-button";
-import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blue'
+import AwesomeButton from 'react-native-really-awesome-button'
 import MapScreen from './MapScreen';
 import LinksScreen from './LinksScreen';
 import firebase from '../firebase.js'; // <--- add this line
+import { Ionicons } from '@expo/vector-icons';
 
 const {height, width} = Dimensions.get('window');
 
@@ -21,7 +21,9 @@ export default class QuestionsScreen extends React.Component {
     this.state = {
       dbCallComplete: false,
       mapMode : true,
-      questions : null
+      questions : null,
+      overlayHeight: new Animated.Value(height * 1/3),
+      expanded: false,
     };
   }
 
@@ -62,24 +64,39 @@ export default class QuestionsScreen extends React.Component {
   }
 
 
+  _expand(){
+    if(this.state.expanded){
+      Animated.timing(this.state.overlayHeight, {
+        toValue: height * 1/3,
+        velocity: 3,
+        overshootClamping: true
+      }).start();
+    } else {
+      Animated.timing(this.state.overlayHeight, {
+        toValue: height - 130,
+        velocity: 3,
+        overshootClamping: true
+      }).start();
+    }
+    this.setState({expanded: !this.state.expanded});
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
         <MapScreen ref="map"/>
 
-        <View style={styles.overlay}>
-          <View style={styles.header}></View>
+        <Animated.View ref="overlay" style={[styles.overlay, 
+          {height:this.state.overlayHeight}]}>
+          <TouchableOpacity 
+            onPress={next => this._expand()}
+            style={styles.toggleButton}>
+            <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={50} color="blue" />
+          </TouchableOpacity>
           <LinksScreen ref="list"
           refreshCallback = {this.refreshData.bind(this)}
           navigation = {this.props.navigation} />
-        </View>
-        
-        {/* <AwesomeButtonBlue 
-            raiseLevel={0}
-            onPress={next => this.setState({mapMode : !this.state.mapMode})}
-            style={styles.toggleButton}>
-            {this.state.mapMode ? "Map" : "List"}
-        </AwesomeButtonBlue> */}
+        </Animated.View>
 
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item buttonColor='#9b59b6' title="Add Question" onPress={() => this.props.navigation.push("NewQuestionScreen")}>
@@ -99,14 +116,15 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   toggleButton: {
-      position: "absolute",
-      margin: 10,
-      bottom:0
+      //position: "absolute",
+      //margin: 10,
+      //top:0,
+      width: width,
+      backgroundColor: 'rgba(52, 52, 52, 0)'
   }, 
   overlay: {
     position: "absolute",
     bottom: 0,
-    height: height * 1/3,
     width: width,
   }, 
   header: {
