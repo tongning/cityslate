@@ -13,6 +13,11 @@ import MapScreen from './MapScreen';
 
 
 export default class App extends Component {
+
+  static navigationOptions = {
+    title: 'Links',
+  };
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -52,11 +57,7 @@ export default class App extends Component {
           
           <TouchableOpacity 
             style={styles.btnView}
-            onPress={onPress = () => {
-              this.setState({
-                
-              })
-            }}
+            onPress={() => this.props.navigation.push("Questions")}
             >   
             <Text style={{
               color: 'white',

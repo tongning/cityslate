@@ -53,7 +53,8 @@ MapStack.navigationOptions = {
 const QuestionsStack = createStackNavigator({
   Questions: QuestionsScreen,
   Question:QuestionScreen,
-  NewQuestionScreen:NewQuestionScreen
+  NewQuestionScreen:NewQuestionScreen,
+  Login:HomeScreen
 });
 
 QuestionsStack.navigationOptions = {

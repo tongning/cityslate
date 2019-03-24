@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, RefreshControl } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
-import {View, Text, Image, Button,Alert} from 'react-native';
+import {View, Text, Image, Button,Alert, Dimensions} from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
 import MapScreen from '../screens/MapScreen';
 import QuestionScreen from '../screens/QuestionScreen';
@@ -26,6 +26,7 @@ export default class LinksScreen extends React.Component {
     }
    return (
       <View style={{flex:1}}>
+      
       <ScrollView style={styles.container}
         refreshControl={
           <RefreshControl
@@ -42,21 +43,36 @@ export default class LinksScreen extends React.Component {
     );
   }
 }
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
   submitButton: {
-  width: 60,  
-  height: 60,   
-  borderRadius: 30,            
-  backgroundColor: '#ee6e73',                                    
-  position: 'absolute',                                          
-  bottom: 10,                                                    
-  right: 10, 
+    width: width,  
+    height: 60,   
+    borderRadius: 30,            
+    backgroundColor: 'lightblue',                                    
+    position: 'absolute',                                          
+    bottom: 10,                                                    
+    right: 10, 
+},
+textInput: {
+  fontFamily:'monospace',
+  height:55,
+  flex:1,
+  width: width-40,
+  alignItems: 'center',
+  borderRadius: 10,
+  flexDirection: 'row',
+  borderWidth: 0.5,
+  paddingLeft: 15,
+  paddingRight: 15,
+  marginBottom: 10,
+  backgroundColor: 'lightgray',
 }
 });
 

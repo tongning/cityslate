@@ -73,15 +73,8 @@ export default class QuestionsScreen extends React.Component {
           refreshCallback = {this.refreshData.bind(this)}
           navigation = {this.props.navigation} />
         </View>
-        
-        {/* <AwesomeButtonBlue 
-            raiseLevel={0}
-            onPress={next => this.setState({mapMode : !this.state.mapMode})}
-            style={styles.toggleButton}>
-            {this.state.mapMode ? "Map" : "List"}
-        </AwesomeButtonBlue> */}
 
-        <ActionButton buttonColor="rgba(231,76,60,1)">
+        <ActionButton buttonColor="green">
           <ActionButton.Item buttonColor='#9b59b6' title="Add Question" onPress={() => this.props.navigation.push("NewQuestionScreen")}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
@@ -106,7 +99,7 @@ const styles = StyleSheet.create({
   overlay: {
     position: "absolute",
     bottom: 0,
-    height: height * 1/3,
+    height: height * 2/5,
     width: width,
   }, 
   header: {
