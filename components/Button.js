@@ -10,12 +10,11 @@ import { TouchableNativeFeedback,
 
 const { width } = Dimensions.get('window')
 const Button = ({
-  placeholder="user",
+  placeholder="",
   placeholderTextColor='white',
   imgUrl,
 }) => {
-  const Touchable =
-      Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
+  const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   return (<Touchable>
     <View style={styles.btnView}>
       <Text style={{

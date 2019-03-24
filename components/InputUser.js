@@ -9,12 +9,7 @@ const InputUser = ({
   <Image style={styles.icon} source={require("../assets/images/avatar.png")}
   />
   <TextInput
-    style={{
-        fontSize: 25,
-        height: 50,
-        flex: 1,
-        color: 'white',
-      }}
+    style={{ fontSize: 25, height: 50,flex: 1,color: 'white'}}
       autoCorrect={false}
       spellCheck={false}
       underlineColorAndroid='transparent'
