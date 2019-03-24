@@ -87,6 +87,17 @@ export default class MapScreen extends React.Component {
     });
   }
 
+  focusOnMarker(key){
+    this.refs[key].showCallout();
+    this.setState({
+      region: {
+        latitude: this.refs[key].props.coordinate.latitude,
+        longitude: this.refs[key].props.coordinate.longitude,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
+      },
+    });
+  }
   render() {
     
     return (
@@ -100,6 +111,7 @@ export default class MapScreen extends React.Component {
 
           {this.state.showMarkers ? this.state.markers.map(marker => (
             <MapView.Marker
+              ref={marker.description}
               coordinate={marker.latlng}
               title={marker.title}
               onPress={this.props.focusCallback.bind(null, marker.description)}>

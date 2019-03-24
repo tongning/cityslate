@@ -3,7 +3,6 @@ import React from 'react';
 import {View, StyleSheet, Dimensions, Animated, TouchableOpacity} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AwesomeButton from 'react-native-really-awesome-button'
 import MapScreen from './MapScreen';
 import LinksScreen from './LinksScreen';
 import firebase from '../firebase.js'; // <--- add this line
@@ -33,7 +32,6 @@ export default class QuestionsScreen extends React.Component {
     snapshot.forEach(function(childSnapshot){
       let key = childSnapshot.key;
       let childData = childSnapshot.val();
-      console.log(childData);
       arr[key] = childData;
     });
 
@@ -86,6 +84,11 @@ export default class QuestionsScreen extends React.Component {
     this.refs.list.scrollToQuestion(key);
   }
 
+  focusMarker = (key) => {
+    console.log(key);
+    this.refs.map.focusOnMarker(key);
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -99,6 +102,7 @@ export default class QuestionsScreen extends React.Component {
             <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={buttonSize} color="blue" />
           </TouchableOpacity>
           <LinksScreen ref="list"
+          focusCallback={this.focusMarker.bind(this)}
           refreshCallback = {this.refreshData.bind(this)}
           navigation = {this.props.navigation} />
         </Animated.View>

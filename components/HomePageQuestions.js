@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, Dimensions, Button} from 'react-native';
+import {View, Text, Image, Dimensions, Button, TouchableOpacity} from 'react-native';
 import UpvoteCounter from '../components/UpvoteCounter';
 import CardView from 'react-native-cardview'
 import IconWithTextBelow from '../components/IconWithTextBelow';
@@ -16,12 +16,15 @@ export default class HomePageQuestions extends React.Component {
   }
   render() {
     console.log("THIS PROPS DATA STUFF", this.props.data, this.props.my_key)
+
     return (
       
       <View style={{ borderColor: 'grey',
       alignItems:"center",borderWidth: 2, flexDirection: "row", flex: 1, width: 350/*Dimensions.get('window').width*0.7*/ }}>
-  
-        <IconWithTextBelow></IconWithTextBelow>
+        <TouchableOpacity onPress = {next => this.props.focusCallback(this.props.my_key)}>
+        <IconWithTextBelow
+        ></IconWithTextBelow>
+        </TouchableOpacity>
         <View style={[{ width: 180, margin: 10}]}>
         <Button
           color="#ff5c5c"

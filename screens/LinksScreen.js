@@ -5,6 +5,7 @@ import HomePageQuestions from '../components/HomePageQuestions';
 import {ScrollIntoView, wrapScrollView} from 'react-native-scroll-into-view'
 
 
+
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Links',
@@ -14,17 +15,9 @@ export default class LinksScreen extends React.Component {
     this.state = {
       refreshing: false,
       questions: [],
-      idx: 0,
-      lookup: {},
     }
   }
 
-  _generateItem(navigation, key, questionList){
-    this.state.lookup[key] = this.state.idx;
-    this.state.idx += 1;
-    return (<ScrollIntoView ref={key}><HomePageQuestions  navigation = {navigation}  
-      data={questionList[key]} my_key = {key} ></HomePageQuestions></ScrollIntoView>)
-  }
 
   scrollToQuestion(key){
     this.refs[key].scrollIntoView();
@@ -35,7 +28,6 @@ export default class LinksScreen extends React.Component {
       this.setState({refreshing: true});
       this.props.refreshCallback();
     }
-    this.state.idx = 0;
 
    return (
       <View style={{flex:1}}>
@@ -47,7 +39,8 @@ export default class LinksScreen extends React.Component {
             onRefresh={_onRefresh}
           />
         }>
-        {Object.keys(this.state.questions).map(question => this._generateItem(this.props.navigation, question, this.state.questions))}
+        {Object.keys(this.state.questions).map(question => <ScrollIntoView ref={question}><HomePageQuestions focusCallback={this.props.focusCallback}  navigation = {this.props.navigation}  
+      data={this.state.questions[question]} my_key = {question} ></HomePageQuestions></ScrollIntoView>)}
         
       </CustomScrollView>
     </View>
