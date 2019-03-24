@@ -27,8 +27,9 @@ export default class NewQuestionScreen extends React.Component {
         lat = this.state.region.latitude;
         lon = this.state.region.longitude;
         upvotes = 0;
+        username = "Wisley Won"
         firebase.database().ref('Questions').push({
-            questionText, lat, lon, upvotes
+            questionText, lat, lon, upvotes, username
         }).then((data) => {
             //success callback
             console.log('data ', data)
