@@ -15,7 +15,7 @@ export default class IconWithTextBelow extends React.Component {
     return (
         <View style={this.storyCounters}>
             <Icon name="eye" style={this.iconCounter} />
-            <Text style={this.iconCounterText}>5 miles</Text>
+            <Text style={this.iconCounterText}>{(Math.random()*6).toFixed(1)} miles</Text>
         </View>
     );
   }
