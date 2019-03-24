@@ -65,8 +65,6 @@ export default class HomePageQuestions extends React.Component {
   }
 }
 
-const { width } = Dimensions.get('window')
-
 const styles = StyleSheet.create({
   logo: {
     flex:1,

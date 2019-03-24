@@ -138,10 +138,9 @@ const styles = StyleSheet.create({
   overlay: {
     position: "absolute",
     bottom: 0,
-    height: height * 2/5,
+    height: height * 0.3,
     width: width,
-    color: 'lightgray',
-    backgroundColor: 'lightgray'
+    backgroundColor: 'lightblue'
   }, 
   header: {
     height: 200,

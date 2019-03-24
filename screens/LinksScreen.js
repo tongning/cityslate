@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, RefreshControl,View } from 'react-native';
+import { ScrollView, StyleSheet, RefreshControl,View, Dimensions } from 'react-native';
 import HomePageQuestions from '../components/HomePageQuestions';
 import {ScrollIntoView, wrapScrollView} from 'react-native-scroll-into-view'
 
@@ -13,7 +13,7 @@ export default class LinksScreen extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
-      questions: [],
+      questions: []
     }
   }
 
