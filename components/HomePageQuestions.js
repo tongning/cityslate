@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, Dimensions, Button, StyleSheet,TouchableOpacity} from 'react-native';
+import {View, Text, Image, Dimensions, Button, StyleSheet,TouchableOpacity, Animated} from 'react-native';
 import UpvoteCounter from '../components/UpvoteCounter';
 import CardView from 'react-native-cardview'
 import IconWithTextBelow from '../components/IconWithTextBelow';
@@ -7,26 +7,26 @@ import IconWithTextBelow from '../components/IconWithTextBelow';
 const {height, width} = Dimensions.get('window');
 
 export default class HomePageQuestions extends React.Component {
-  static navigationOptions = {
-    title: 'Links',
-  };
   constructor(props){
     super(props);
     this.state={
-      // This is our Default Button Above Text.
+      focused: false,
+      color: 'white',
       ButtonText : 'Default Button Title'
     }
   }
-
-// ChangeButtonTitle=()=> {
-//   this.setState({ButtonText : 'New Button Title'})
-// }
+  focusColor(){
+    this.setState({focused: true, color: 'lightyellow'});
+  }
+  unfocusColor(){
+    this.setState({focused: false, color: 'white'})
+  }
   render() {
     console.log("THIS PROPS DATA STUFF", this.props.data, this.props.my_key)
 
     return (
       
-      <View style={{ borderColor: 'lightgray',
+      <View style={[{ borderColor: 'lightgray',
       alignItems:"center",
       //marginLeft:5,
       //marginRight:5,
@@ -35,7 +35,7 @@ export default class HomePageQuestions extends React.Component {
       borderRadius: 18,
       flexDirection: "row", 
       //flex: 1, 
-      width: width  }}>
+      width: width  },{backgroundColor:this.state.color}]}>
         <TouchableOpacity onPress = {next => this.props.focusCallback(this.props.my_key)}>
           <IconWithTextBelow
           ></IconWithTextBelow>
