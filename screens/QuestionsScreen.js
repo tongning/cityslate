@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View, StyleSheet, Dimensions, Button} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AwesomeButton from "react-native-really-awesome-button";
@@ -8,7 +8,6 @@ import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blu
 import MapScreen from './MapScreen';
 import LinksScreen from './LinksScreen';
 import firebase from '../firebase.js'; // <--- add this line
-import HomePageQuestions from '../components/HomePageQuestions';
 
 const {height, width} = Dimensions.get('window');
 
@@ -51,7 +50,6 @@ export default class QuestionsScreen extends React.Component {
   }
 
   refreshData = () => {
-    console.log("Refresh");
     firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
 

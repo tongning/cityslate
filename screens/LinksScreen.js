@@ -15,7 +15,7 @@ export default class LinksScreen extends React.Component {
     super(props);
     this.state = {
       refreshing: false,
-      questions: null
+      questions: []
     }
   }
 
