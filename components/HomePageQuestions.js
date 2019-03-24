@@ -30,7 +30,7 @@ export default class HomePageQuestions extends React.Component {
 
         <View style={[{ margin: 10}]}>
          
-        <UpvoteCounter my_key={this.props.my_key}></UpvoteCounter>
+        <UpvoteCounter my_upvotes={this.props.data.upvotes} my_key ={this.props.my_key}></UpvoteCounter>
         </View>
 
       </View>
