@@ -10,6 +10,7 @@ import LinksScreen from './LinksScreen';
 import firebase from '../firebase.js'; // <--- add this line
 import HomePageQuestions from '../components/HomePageQuestions';
 
+const {height, width} = Dimensions.get('window');
 
 export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
@@ -26,16 +27,13 @@ export default class QuestionsScreen extends React.Component {
   }
 
   callback = (snapshot) => {
-    var nav = this.props.navigation;
     let arr = {};
- 
     snapshot.forEach(function(childSnapshot){
       let key = childSnapshot.key;
       let childData = childSnapshot.val();
       console.log(childData);
       arr[key] = childData;
     });
-
       this.setState({dbCallComplete: true, questions: arr})
   }
 
@@ -46,19 +44,20 @@ export default class QuestionsScreen extends React.Component {
   componentDidMount(){
     firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
-  render() {
 
+  render() {
     return (
       <View style={{flex: 1}}>
-        {!this.state.mapMode ? 
-        <MapScreen/> : 
-        <LinksScreen  navigation = {this.props.navigation} 
+
+        <MapScreen/>  
+
+        <View style={styles.overlay}>
+          <LinksScreen  navigation = {this.props.navigation} 
         my_questions = {!this.state.dbCallComplete ? null : 
           Object.keys(this.state.questions).map(question => 
-          <HomePageQuestions navigation = {this.props.navigation}  
-          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>}
-
-
+          <HomePageQuestions data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>
+        </View>
+        
         <AwesomeButtonBlue 
             raiseLevel={0}
             onPress={next => this.setState({mapMode : !this.state.mapMode})}
@@ -87,5 +86,11 @@ const styles = StyleSheet.create({
       position: "absolute",
       margin: 10,
       bottom:0
+  }, 
+  overlay: {
+    position: "absolute",
+    bottom: 0,
+    height: height * 1/3,
+    width: width,
   }
 });
