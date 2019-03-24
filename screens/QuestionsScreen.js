@@ -1,15 +1,15 @@
 
 import React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Dimensions, Animated, TouchableOpacity} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import AwesomeButton from "react-native-really-awesome-button";
-import AwesomeButtonBlue from 'react-native-really-awesome-button/src/themes/blue'
 import MapScreen from './MapScreen';
 import LinksScreen from './LinksScreen';
 import firebase from '../firebase.js'; // <--- add this line
+import { Ionicons } from '@expo/vector-icons';
 
 const {height, width} = Dimensions.get('window');
+const buttonSize = 70;
 
 export default class QuestionsScreen extends React.Component {
   static navigationOptions = {
@@ -21,7 +21,9 @@ export default class QuestionsScreen extends React.Component {
     this.state = {
       dbCallComplete: false,
       mapMode : true,
-      questions : null
+      questions : null,
+      overlayHeight: new Animated.Value(height * 1/3),
+      expanded: false,
     };
   }
 
@@ -30,7 +32,6 @@ export default class QuestionsScreen extends React.Component {
     snapshot.forEach(function(childSnapshot){
       let key = childSnapshot.key;
       let childData = childSnapshot.val();
-      console.log(childData);
       arr[key] = childData;
     });
 
@@ -62,17 +63,50 @@ export default class QuestionsScreen extends React.Component {
   }
 
 
+  _expand(){
+    if(this.state.expanded){
+      Animated.timing(this.state.overlayHeight, {
+        toValue: height * 1/3,
+        velocity: 3,
+        overshootClamping: true
+      }).start();
+    } else {
+      Animated.timing(this.state.overlayHeight, {
+        toValue: height - 130,
+        velocity: 3,
+        overshootClamping: true
+      }).start();
+    }
+    this.setState({expanded: !this.state.expanded});
+  }
+
+  focusItem(key){
+    this.refs.list.scrollToQuestion(key);
+  }
+
+  focusMarker = (key) => {
+    console.log(key);
+    this.refs.map.focusOnMarker(key);
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
-        <MapScreen ref="map"/>
+        <MapScreen ref="map" focusCallback={this.focusItem.bind(this)}/>
 
-        <View style={styles.overlay}>
-          <View style={styles.header}></View>
-          <LinksScreen ref="list"
-          refreshCallback = {this.refreshData.bind(this)}
-          navigation = {this.props.navigation} />
-        </View>
+        <Animated.View ref="overlay" style={[styles.overlay, 
+          {height:this.state.overlayHeight}]}>
+          <TouchableOpacity 
+            onPress={next => this._expand()}
+            style={styles.toggleButton}>
+            <Ionicons name={this.state.expanded ? "ios-arrow-dropdown-circle" : "ios-arrow-dropup-circle"} size={buttonSize} color="blue" />
+          </TouchableOpacity>
+
+            <LinksScreen ref="list"
+            focusCallback={this.focusMarker.bind(this)}
+            refreshCallback = {this.refreshData.bind(this)}
+            navigation = {this.props.navigation} />
+        </Animated.View>
 
         <ActionButton buttonColor="green">
           <ActionButton.Item buttonColor='#9b59b6' title="Add Question" onPress={() => this.props.navigation.push("NewQuestionScreen")}>
@@ -92,15 +126,22 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   toggleButton: {
-      position: "absolute",
-      margin: 10,
-      bottom:0
+      position: "relative",
+      //margin: 10,
+      top: -1 * buttonSize/2,
+      width: width / 2 + buttonSize/2,
+      backgroundColor: 'rgba(52, 52, 52, 0)',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      zIndex: 4,
   }, 
   overlay: {
     position: "absolute",
     bottom: 0,
     height: height * 2/5,
     width: width,
+    color: 'lightgray',
+    backgroundColor: 'lightgray'
   }, 
   header: {
     height: 200,

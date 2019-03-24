@@ -19,10 +19,6 @@ export default class MapScreen extends React.Component {
     firebase.database().ref('Questions/').once('value', function (snapshot) {
       console.log("SNAP", snapshot.val())
       for (var key in snapshot.val()) {
-        /*
-        arr.unshift(<HomePageQuestions
-          navigation={nav} key={1}
-          my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);*/
         // Only include markers within 5 miles
        
         const start = {
@@ -87,6 +83,17 @@ export default class MapScreen extends React.Component {
     });
   }
 
+  focusOnMarker(key){
+    this.refs[key].showCallout();
+    this.setState({
+      region: {
+        latitude: this.refs[key].props.coordinate.latitude,
+        longitude: this.refs[key].props.coordinate.longitude,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
+      },
+    });
+  }
   render() {
     
     return (
@@ -100,16 +107,12 @@ export default class MapScreen extends React.Component {
 
           {this.state.showMarkers ? this.state.markers.map(marker => (
             <MapView.Marker
+              ref={marker.description}
               coordinate={marker.latlng}
               title={marker.title}
-              description={marker.description}>
+              onPress={this.props.focusCallback.bind(null, marker.description)}>
 
-                <MapView.Callout tooltip>
-                <TouchableHighlight  underlayColor='#dddddd'>
-                                          <View>
-                                              <Text>{marker.title}{"\n"}{marker.description}</Text>
-                                          </View>
-                                      </TouchableHighlight>
+                <MapView.Callout>
                 </MapView.Callout>
             </MapView.Marker>
           )) : null}

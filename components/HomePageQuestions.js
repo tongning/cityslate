@@ -4,6 +4,7 @@ import UpvoteCounter from '../components/UpvoteCounter';
 import CardView from 'react-native-cardview'
 import IconWithTextBelow from '../components/IconWithTextBelow';
 
+const {height, width} = Dimensions.get('window');
 
 export default class HomePageQuestions extends React.Component {
   static navigationOptions = {
@@ -22,6 +23,7 @@ export default class HomePageQuestions extends React.Component {
 // }
   render() {
     console.log("THIS PROPS DATA STUFF", this.props.data, this.props.my_key)
+
     return (
       
       <View style={{ borderColor: 'lightgray',
@@ -33,9 +35,11 @@ export default class HomePageQuestions extends React.Component {
       borderRadius: 18,
       flexDirection: "row", 
       //flex: 1, 
-      width: width }}>
-  
-        <IconWithTextBelow></IconWithTextBelow>
+      width: width  }}>
+        <TouchableOpacity onPress = {next => this.props.focusCallback(this.props.my_key)}>
+          <IconWithTextBelow
+          ></IconWithTextBelow>
+        </TouchableOpacity>
         <View style={StyleSheet.container}>
 
         <TouchableOpacity
@@ -50,6 +54,7 @@ export default class HomePageQuestions extends React.Component {
             }}>{this.props.data.questionText}</Text>
         </TouchableOpacity>
         </View>
+        
         <UpvoteCounter 
           my_upvotes={this.props.data.upvotes} 
           my_key ={this.props.my_key}

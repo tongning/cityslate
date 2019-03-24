@@ -26,9 +26,11 @@
     "react-native-gifted-chat": "^0.7.2",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-really-awesome-button": "^1.4.2",
+    "react-native-scroll-into-view": "^1.0.3",
     "react-native-stars": "^1.1.5",
     "react-navigation": "^3.0.9",
-    "react-upvote": "0.0.2"
+    "react-upvote": "0.0.2",
+    "rn-sliding-up-panel": "^2.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
