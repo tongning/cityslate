@@ -36,19 +36,8 @@ export default class QuestionsScreen extends React.Component {
       arr[key] = childData;
     });
 
-    // let arr = []
-    // console.log("SNAP", snapshot.val())
-    //   let keyidx = 0;
-    //   for (var key in snapshot.val()) {
-
-    //     arr.unshift(<HomePageQuestions
-    //       navigation={nav} key={keyidx}
-    //       my_comment={snapshot.val()[key].questionText} ></HomePageQuestions>);
-    //     keyidx++;
-    //   }
       this.setState({dbCallComplete: true, questions: arr})
   }
-
 
   switchMode() {
       this.setState({mapMode : !this.state.mapMode});
@@ -58,8 +47,6 @@ export default class QuestionsScreen extends React.Component {
     firebase.database().ref('Questions/').once('value', this.callback.bind(this));
   }
   render() {
-    //var my_arr = this.createListOfStuff()
-    //console.log("IDK",my_arr);
 
     return (
       <View style={{flex: 1}}>
@@ -68,7 +55,8 @@ export default class QuestionsScreen extends React.Component {
         <LinksScreen  navigation = {this.props.navigation} 
         my_questions = {!this.state.dbCallComplete ? null : 
           Object.keys(this.state.questions).map(question => 
-          <HomePageQuestions data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>}
+          <HomePageQuestions navigation = {this.props.navigation}  
+          data={this.state.questions[question]} my_key = {question} ></HomePageQuestions>)}/>}
 
 
         <AwesomeButtonBlue 
